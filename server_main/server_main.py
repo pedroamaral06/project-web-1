@@ -5,7 +5,7 @@ import threading
 import json
 import os
 from functools import wraps
-from datetime import datetime, time
+from datetime import datetime, time as dtime
 from flask import Flask, request, jsonify, send_from_directory
 from flasgger import Swagger
 
@@ -51,7 +51,7 @@ def processar_alertas_assincrono(equipamento_id, temp0, temp1, temp2):
     def tarefa():
         try:
             print("\n[Ajudante Invisível] Recebi a tarefa. Vou demorar 5 segundos a calcular...")
-            time.sleep(5)  # Isto faz o computador "dormir" e esperar 5 segundos
+            time.sleep(5)
             conn = get_db_connection()
             cursor = conn.cursor()
 
@@ -611,6 +611,6 @@ if __name__ == '__main__':
     print("="*70)
     print(f"BD: {DB_PATH}")
     print("Acesso: http://localhost:5000")
-    print("Swagger: http://localhost:5000/apidocs")
+    print("Swagger: http://localhost:5000/api/docs/")
     print("="*70 + "\n")
     app.run(debug=True, port=5000)
