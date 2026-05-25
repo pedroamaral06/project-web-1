@@ -502,7 +502,7 @@ def registar_temperatura():
         return jsonify({"erro": str(e)}), 500
 
 @app.route('/api/alertas', methods=['GET'])
-#@verificar_jwt
+@verificar_jwt
 def listar_alertas():
     """
     Listar histórico de alertas

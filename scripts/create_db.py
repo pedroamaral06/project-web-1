@@ -53,7 +53,26 @@ def create_sqlite_database(db_name):
         Temp1 REAL,
         Temp2 REAL,
         PRIMARY KEY (Equipamento_ID, DataHora),
-        FOREIGN KEY (Equipamento_ID) REFERENCES Equipamento(ID) 
+        FOREIGN KEY (Equipamento_ID) REFERENCES Equipamento(ID)
+    );
+
+    DROP TABLE IF EXISTS limites_sensores;
+    CREATE TABLE limites_sensores (
+        id INTEGER PRIMARY KEY,
+        Sensor_tipo TEXT UNIQUE,
+        Min_val REAL,
+        Max_val REAL
+    );
+
+    DROP TABLE IF EXISTS alertas_sensores;
+    CREATE TABLE alertas_sensores (
+        id INTEGER PRIMARY KEY,
+        Equipamento_ID INTEGER,
+        Sensor_tipo TEXT,
+        Leitura REAL,
+        DataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        Mensagem TEXT,
+        FOREIGN KEY (Equipamento_ID) REFERENCES Equipamento(ID)
     );
     ''')
 
