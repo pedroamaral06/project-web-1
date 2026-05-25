@@ -28,7 +28,7 @@ def create_sqlite_database(db_name):
     DROP TABLE IF EXISTS Equipamento;
     CREATE TABLE Equipamento (
         ID INTEGER PRIMARY KEY,
-        NumeroSerie TEXT
+        NumeroSerie TEXT UNIQUE
     );
 
     DROP TABLE IF EXISTS PropriedadeEquipamento;
@@ -38,7 +38,7 @@ def create_sqlite_database(db_name):
         DataInicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         DataFim TIMESTAMP,
         PRIMARY KEY (Equipamento_ID, Cliente_NIF, DataInicio),
-        FOREIGN KEY (Equipamento_ID) REFERENCES Equipamento(ID),
+        FOREIGN KEY (Equipamento_ID) REFERENCES Equipamento(ID) ON DELETE CASCADE,
         FOREIGN KEY (Cliente_NIF) REFERENCES Cliente(NIF)
     );
 
@@ -51,7 +51,7 @@ def create_sqlite_database(db_name):
         Temp1 REAL,
         Temp2 REAL,
         UNIQUE(Equipamento_ID, DataHora),
-        FOREIGN KEY (Equipamento_ID) REFERENCES Equipamento(ID)
+        FOREIGN KEY (Equipamento_ID) REFERENCES Equipamento(ID) ON DELETE CASCADE
     );
 
     DROP TABLE IF EXISTS limites_sensores;
@@ -73,7 +73,7 @@ def create_sqlite_database(db_name):
         Leitura REAL,
         DataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         Mensagem TEXT,
-        FOREIGN KEY (Equipamento_ID) REFERENCES Equipamento(ID)
+        FOREIGN KEY (Equipamento_ID) REFERENCES Equipamento(ID) ON DELETE CASCADE
     );
     ''')
 
