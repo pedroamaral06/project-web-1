@@ -1,0 +1,7 @@
+Faker
+flask
+flask-socketIO
+websockets
+PyJWT
+flasgger
+requests
