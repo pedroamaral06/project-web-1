@@ -40,8 +40,17 @@ def create_sqlite_database(db_name):
     DROP TABLE IF EXISTS Equipamento;
     CREATE TABLE Equipamento (
         ID INTEGER PRIMARY KEY,
-        NumeroSerie TEXT,
+        NumeroSerie TEXT
+    );
+
+    DROP TABLE IF EXISTS PropriedadeEquipamento;
+    CREATE TABLE PropriedadeEquipamento (
+        Equipamento_ID INTEGER,
         Cliente_NIF TEXT,
+        DataInicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        DataFim TIMESTAMP,
+        PRIMARY KEY (Equipamento_ID, Cliente_NIF, DataInicio),
+        FOREIGN KEY (Equipamento_ID) REFERENCES Equipamento(ID),
         FOREIGN KEY (Cliente_NIF) REFERENCES Cliente(NIF)
     );
 

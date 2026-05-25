@@ -12,8 +12,11 @@ from flasgger import Swagger
 app = Flask(__name__, static_folder='static', static_url_path='', template_folder='templates')
 app.config['JSON_SORT_KEYS'] = False
 
-# Inicializar Swagger
-swagger = Swagger(app, template={
+# Inicializar Swagger com o caminho exigido pelo professor
+swagger_config = Swagger.DEFAULT_CONFIG
+swagger_config['specs_route'] = '/api/docs/'
+
+swagger = Swagger(app, config=swagger_config, template={
     "swagger": "2.0",
     "info": {
         "title": "Sistema de Monitorização de Equipamentos",
